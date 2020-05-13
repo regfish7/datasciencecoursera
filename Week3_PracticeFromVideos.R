@@ -229,3 +229,29 @@ image(t(faceData)[, nrow(faceData):1], main = "(d)")
 # Notice that the principal components of the scaled matrix, shown in the Rotation component of the prcomp output, ARE the
 # columns of V, the right singular values. Thus, PCA of a scaled matrix yields the V matrix (right singular vectors) of the same
 # scaled matrix.
+
+#### Lesson 3: Working with Color ####
+
+pal <- colorRamp(c("red", "blue"))
+pal(0) #vector of three values, red, green, blue (this is all red) in range(0,255)
+pal(1) # this is all blue (other end of the spectrum)
+pal(0.5) # halfway mixture of red and blue
+pal(seq(0,1,len=10)) #sequence of colors between red and blue
+
+pal <- colorRampPalette(c("red", "yellow"))
+pal(2) #integer arguments instead of between 0 and 1; output is character vector of hex values (#redgreenblue - FF0000 = max red, no green, blue)
+pal(10)
+
+library(RColorBrewer)
+cols <- brewer.pal(3, "BuGn") # number colors you want, name of palette
+cols #colors in hexadecimal form
+pal <- colorRampPalette(cols)
+image(volcano, col = pal(20)) #20 colors interpolated from the blue green palette
+
+x <- rnorm(10000)
+y <- rnorm(10000)
+smoothScatter(x,y)
+
+#plot with transparency
+plot(x,y, col = rgb(0,0,0,0.2), pch = 19) #rgb all zeros = black
+
